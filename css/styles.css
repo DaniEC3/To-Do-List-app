@@ -64,3 +64,10 @@ li > crossOutButton {
 	float: right;
 	width: 50%;
 }
+
+.DeleteButton {
+	float: right;
+	width: 8%;
+	height: 8%;
+	align-content: center;
+}

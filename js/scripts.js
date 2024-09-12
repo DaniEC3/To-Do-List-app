@@ -10,6 +10,7 @@ function newItem() {
 
   }
   $('#input').val('');
+  deleteButton();
 }
 
 
@@ -28,19 +29,30 @@ function crossOut() {
 $("#list").on("click",'.list-item',crossOut);
 
 
+function deleteButton() {
+  let listItems = $('.list-item');  // Select all elements with the class 'list-item'
 
+  listItems.each(function() {  // Use jQuery's each() method to iterate over the items
+    let item = $(this);  // 'this' refers to the current DOM element, so wrap it with $ for jQuery
 
- // //3(i). Adding the delete button "X": 
- //   let crossOutButton = document.createElement("crossOutButton");
- //   crossOutButton.appendChild(document.createTextNode("X"));
- //   li.appendChild(crossOutButton);
+    if (!item.hasClass('buttonActive')) {  // Check if the item does not have the 'buttonActive' class
+      item.addClass('buttonActive');  // Add the 'buttonActive' class
+      
+      // Create a new delete button for each item
+      let deleteButton = $("<button class='DeleteButton'>x</button>");
+      
+      // Append the delete button to the current list item (not all list items)
+      item.append(deleteButton);
+    }
 
- //   crossOutButton.addEventListener("click", deleteListItem);
- // //3(ii). Adding CLASS DELETE (DISPLAY: NONE) from the css:
- //   function deleteListItem(){
- //     li.classList.add("delete")
- //   }
+  });
+}
 
+function deleteListItem(){
+  $(this).parent().addClass("delete")
+  }
+
+$(document).on("click", ".DeleteButton", deleteListItem);
 
  // 4. Reordering the items: 
    $('#list').sortable();
